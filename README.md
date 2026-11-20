@@ -19,9 +19,9 @@ happening again. Its rules cover:
 - **Errors:** when a plain `try/catch` is enough, when to use a `Result`
   type, and when [Effect](https://effect.website) is worth it.
 - **Tests:** test behavior on real outputs, and see each test fail once.
-- **Modern UI:** shadcn-style primitives, Tailwind tokens, both color
-  schemes, accessibility, loading, empty and error states, forms, server
-  state.
+- **Modern UI:** shadcn-style primitives, colors only from tokens (in CSS,
+  Tailwind and code), both color schemes, accessibility, loading, empty and
+  error states, forms, server state.
 - **Production:** security, observability, migrations, pinned toolchains,
   least-privilege CI.
 - **Workflow:** focused commits, an `AGENTS.md` that holds the rules, and a

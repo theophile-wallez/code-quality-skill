@@ -51,8 +51,11 @@ Don't report what the linter or formatter already catches; run them instead.
 
 ## UI (if any)
 
-- [ ] Built from the design system's primitives and tokens, no hardcoded
-      colors or arbitrary values?
+- [ ] Built from the design system's primitives and tokens, no arbitrary
+      values?
+- [ ] Every color a token: no hex, `rgb()`, `oklch()` or named color outside
+      the tokens file, no Tailwind palette class (`bg-blue-500`,
+      `text-white`) or arbitrary color, no hex string in code?
 - [ ] Keyboard, focus, labels, contrast, in both color schemes?
 - [ ] Loading, empty, error and success states, and feedback on actions?
 - [ ] Checked on phone, tablet and desktop, nothing overflowing sideways?

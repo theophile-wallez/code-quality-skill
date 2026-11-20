@@ -118,10 +118,16 @@ strict TypeScript project.
 
 A short script, run in `check`, covers what's specific to the project:
 comments that switch a check off, stylesheets past a length, remote URLs in
-CSS, an alias into the importer's own folder, a banned import or API, a TODO
-without an issue. Each rule is a regular expression and a message, and the
-script has its own tests. Template:
-[`assets/scripts/check-sources.ts`](../assets/scripts/check-sources.ts).
+CSS, colors written outside the tokens (a color literal in a stylesheet,
+a Tailwind palette or arbitrary color class, a hex string in code), an alias
+into the importer's own folder, a banned import or API, a TODO without an
+issue. Each rule is a regular expression and a message, and the script has
+its own tests. Template:
+[`assets/scripts/check-sources.ts`](../assets/scripts/check-sources.ts), with
+its rules in [`source-rules.ts`](../assets/scripts/source-rules.ts).
+
+The color rules are strict on purpose: adapt their lists (the tokens file's
+name, the Tailwind prefixes) to the project rather than switching them off.
 
 ## Agent hooks
 

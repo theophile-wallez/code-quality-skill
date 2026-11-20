@@ -90,8 +90,12 @@ These hold everywhere. The references explain each one, with examples.
 **UI** (when the project has one)
 
 - Accessible primitives (shadcn on Radix or Base UI, React Aria…) rather
-  than hand-rolled overlays. Design tokens as CSS variables, no hardcoded
-  colors. Keyboard, focus and contrast checked, in both color schemes.
+  than hand-rolled overlays. Design tokens as CSS variables.
+- Colors come from tokens only: never a hex, `rgb()`, `oklch()` or named
+  color outside the tokens file, never a Tailwind palette class
+  (`bg-blue-500`, `text-white`) or arbitrary color (`bg-[#…]`), never a hex
+  string in code.
+- Keyboard, focus and contrast checked, in both color schemes.
 - Every view that loads data handles loading, empty, error and success.
 - Server state goes through a cache library, not `useEffect` + `fetch`.
 

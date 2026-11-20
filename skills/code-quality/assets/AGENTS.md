@@ -52,7 +52,8 @@ Every change must read as if a senior engineer wrote it for code review.
 
 - Components from `<components/ui>` (shadcn: add one with
   `npx shadcn@latest add <name>`), colors and spacing from the tokens in
-  `<src/styles.css>`, never hardcoded.
+  `<src/styles.css>`: never a hex or `rgb()` outside it, never a Tailwind
+  palette class (`bg-blue-500`, `text-white`) or arbitrary color.
 - Every view that loads data handles loading, empty, error and success.
   Server data goes through <TanStack Query>.
 - Keyboard, focus, labels and contrast, in both color schemes, at phone,

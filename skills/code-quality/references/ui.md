@@ -36,8 +36,6 @@ component library and any styling approach.
   `--border`, `--destructive`, `--radius`. With Tailwind v4, declare them in
   `@theme` (or map them there), and use the classes they generate
   (`bg-primary`, `text-muted-foreground`).
-- **No hardcoded colors** in components: no `#3b82f6`, no `bg-blue-500` for a
-  brand color, no `rgba(…)` for a shadow. A new need is a new token.
 - **One spacing scale and one type scale.** No arbitrary values
   (`p-[13px]`, `text-[15px]`) unless something outside the design (a
   third-party widget, a fixed asset) requires it; then a comment says what.
@@ -49,6 +47,52 @@ component library and any styling approach.
   CSS you can't change.
 - **Long class lists** get split by concern or moved into a variant, not
   left as a 200-character line nobody can review.
+
+## Colors come from tokens, nowhere else
+
+A color written as a value outside the tokens file is a color that won't
+follow the theme, that drifts from its neighbors, and that nobody can change
+in one place. So:
+
+- **Colors are defined in one place**, the tokens file (`tokens.css`,
+  `theme.css`, or the `@theme` and `:root` blocks of the main stylesheet):
+  a palette of raw values, then roles that point at it (`--primary:
+  var(--blue-600)`), with a value per color scheme.
+- **Everywhere else, a color is a token**, in every form it takes:
+  - CSS: `color: var(--foreground)`, never `#1f2937`, `rgb(…)`, `hsl(…)`,
+    `oklch(…)` or a named color (`red`, `white`, `black`);
+  - Tailwind: the token's class (`bg-primary`, `text-muted-foreground`,
+    `border-border`), never the default palette (`bg-blue-500`,
+    `text-gray-700`, `text-white`, `shadow-black/10`) or an arbitrary value
+    (`bg-[#3b82f6]`, `text-[rgb(…)]`);
+  - code: inline styles, chart series, canvas fills, SVG `fill` and
+    `stroke` read the token (`var(--chart-1)`, or
+    `getComputedStyle(element).getPropertyValue('--chart-1')`), never a hex
+    string.
+- **Shades and transparency derive from tokens**: `color-mix(in oklch,
+  var(--primary) 20%, transparent)` or Tailwind's opacity modifier on a token
+  (`bg-primary/20`), not a new hand-picked value.
+- **What stays allowed**: `transparent`, `currentColor`, `inherit`, `none`;
+  colors inside images and icon files; the tokens file itself.
+- **A new need is a new token**, named by its role (`--warning`,
+  `--chart-3`), with its value in each scheme. Never a one-off value "just
+  here".
+- **Enforce it.** With Tailwind v4, reset the default palette in the
+  tokens file so its classes don't exist at all:
+  ```css
+  @theme {
+    --color-*: initial;
+    --color-background: var(--background);
+    --color-primary: var(--primary);
+    /* … one line per token */
+  }
+  ```
+  For CSS, the source rules in
+  [`assets/scripts/source-rules.ts`](../assets/scripts/source-rules.ts)
+  reject color literals outside the tokens file, palette and arbitrary color
+  classes, and hex strings in code. Stylelint covers stylesheets too
+  (`color-no-hex`, `color-named: never`, `function-disallowed-list` with
+  `rgb`, `rgba`, `hsl`, `hsla`, `oklch`).
 
 ## Themes
 
