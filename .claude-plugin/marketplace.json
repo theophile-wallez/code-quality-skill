@@ -1,0 +1,22 @@
+{
+  "name": "code-quality",
+  "description": "Clean, professional, readable code, as a Claude Code skill.",
+  "owner": {
+    "name": "theophile-wallez"
+  },
+  "plugins": [
+    {
+      "name": "code-quality",
+      "source": "./",
+      "description": "Holds code to a senior engineer's standard: strict types, validated boundaries, small modules, explicit names, few plain comments, tested behavior, modern accessible UI. Rules, a review checklist and ready-made configs, with tools suggested, never imposed.",
+      "author": {
+        "name": "theophile-wallez"
+      },
+      "version": "1.0.0",
+      "homepage": "https://github.com/theophile-wallez/code-quality-skill",
+      "license": "MIT",
+      "keywords": ["code-quality", "clean-code", "typescript", "linting", "code-review", "shadcn", "tailwind", "accessibility", "agents-md"],
+      "category": "development"
+    }
+  ]
+}
